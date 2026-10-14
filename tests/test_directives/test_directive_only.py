@@ -29,6 +29,14 @@ def test_sectioning(app: SphinxTestApp) -> None:
     )
 
 
+@pytest.mark.sphinx('html', testroot='directive-only', tags=['internal'])
+def test_cross_reference_after_only_with_sections(app: SphinxTestApp) -> None:
+    app.build()
+
+    labels = app.env.get_domain('std').labels
+    assert labels['test_refer'] == ('issue-13463', 'test-refer', 'A.2')
+
+
 def _get_sections(section: nodes.Node) -> list[str | list[Any]]:
     if not isinstance(section, nodes.section):
         return list(map(_get_sections, section.children))
