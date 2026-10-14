@@ -543,7 +543,10 @@ class GoogleDocstring:
 
             if colon:
                 if after:
-                    _desc = [after, *lines[1:]]
+                    continuation = lines[1:]
+                    if not after.endswith('::'):
+                        continuation = self._dedent(continuation)
+                    _desc = [after, *continuation]
                 else:
                     _desc = lines[1:]
 

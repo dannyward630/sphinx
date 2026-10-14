@@ -584,6 +584,22 @@ Returns:
         actual = GoogleDocstring(docstring)
         assert str(actual) == expected
 
+    def test_wrapped_return_description_with_backticks(self):
+        docstring = """Set up logging configuration.
+
+Returns:
+    None or str: If `save_path` is provided, returns the path to the log
+        file.
+"""
+        expected = """Set up logging configuration.
+
+:returns: If `save_path` is provided, returns the path to the log
+          file.
+:rtype: None or str
+"""
+        actual = GoogleDocstring(docstring)
+        assert str(actual) == expected
+
     def test_xrefs_in_return_type(self):
         docstring = """Example Function
 
