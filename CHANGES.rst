@@ -16,6 +16,9 @@ Features added
 Bugs fixed
 ----------
 
+* #13463: Fix cross-references to sections that follow an ``only`` directive
+  containing a nested section. Patch by Danny Ward.
+
 Testing
 -------
 

@@ -362,6 +362,8 @@ class Only(SphinxDirective):
                 if parent.parent:
                     parent = parent.parent
             parent.append(node)
+            # Keep the parser in the same section context as the raised node.
+            self.state.parent = parent
             return []
         finally:
             memo.title_styles = surrounding_title_styles

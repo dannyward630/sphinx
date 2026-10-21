@@ -61,3 +61,13 @@ def _test_sections(
             f'Unnumbered section: {subsection[0]!r}'
         )
         _test_sections(f'{prefix}{i + 1}.', subsection, indent + 4)
+
+
+@pytest.mark.sphinx(
+    'html', testroot='directive-only-cross-reference', tags=['internal']
+)
+def test_reference_after_nested_section_in_only(app: SphinxTestApp) -> None:
+    app.build(filenames=[app.srcdir / 'index.rst'])
+    html = (app.outdir / 'index.html').read_text(encoding='utf-8')
+    assert 'href="#test-refer"' in html
+    assert 'id="test-refer"' in html
